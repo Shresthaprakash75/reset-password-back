@@ -1,1 +1,1 @@
-# reset-password-back
+reset-password-back
