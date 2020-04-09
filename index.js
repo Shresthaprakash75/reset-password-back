@@ -15,15 +15,14 @@ app.use(bodyParser.urlencoded({
 const port = 4000
 
 app.get('/', (req, res) => res.send('Hello World!'))
-app.get('/users', db.checkEmail)
 app.get('/reset-password', (req, res) => {
     res.send(`let's reset password`)
 })
 
 app.post('/reset-password', (req, res) => {
-    console.log(req.body)
-    res.send(req.body)
-
+    console.log(req.body.email)
+    // res.send(req.body)
+    db.getCheckMail(req.body.email)
 })
 
 app.listen(port, () => console.log(`app listening at http://localhost: ${port}`))
