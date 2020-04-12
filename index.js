@@ -20,9 +20,17 @@ app.get('/reset-password', (req, res) => {
 })
 
 app.post('/reset-password', (req, res) => {
-    console.log(req.body.email)
+    // console.log(req.body.email)
     // res.send(req.body)
-    db.getCheckMail(req.body.email)
+    const checkMail = db.getCheckMail(req.body.email)
+    // console.log(checkMail)
+    checkMail.then((a) => {
+        if(a){
+            res.send({
+                "is email valid" : a
+            })
+        }
+    })
 })
 
 app.listen(port, () => console.log(`app listening at http://localhost: ${port}`))

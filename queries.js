@@ -7,18 +7,13 @@ const pool = new Pool({
     port: 5432,
 })
 
-const getCheckMail = (email) => {
-    const checkEmail = (req, res) => {
+const getCheckMail = async(email) => {
+    // const checkEmail = (req, res) => {
         const queryString = "select exists(select 1 from users where email='" + email + "')"
-        pool.query(queryString, (error, results) =>{
-            if(error){
-                throw error
-            }
-            // res.status(200).json(results.rows)
-            console.log(results.rows[0].exists)
-        })
-    }
-    return checkEmail()
+        const result = await pool.query(queryString)
+        return result.rows[0].exists  
+    // }
+    // return checkEmail()
 }
 
 module.exports = {
